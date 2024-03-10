@@ -2,6 +2,7 @@ import Layout from '@/components/Layout'
 import { Card, CardContent } from '@/components/ui/card'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 interface pokemonPayload {
     count: number;
@@ -32,6 +33,7 @@ const Home = () => {
     <Layout>
       <div className="grid grid-cols-2 gap-4 mt-3 mb-3">
         {pokemon?.results.map((item) => (
+          <Link to={`/pokemon/${item.name}`}>
             <Card>
                 <CardContent>
                     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${item.url
@@ -40,6 +42,7 @@ const Home = () => {
                     <p>{item.name}</p>
                 </CardContent>
             </Card>
+          </Link>
         ))}
       </div>
       <div className="col-span-2 flex justify-between mb-3">
