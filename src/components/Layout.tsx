@@ -24,8 +24,9 @@ const Layout = (props: Props) => {
         </div>
       </div>
       <div>
-        {children}
-
+        <div className="p-5">
+          {children}
+        </div>
         <div className="sticky w-full bottom-0 bg-black">
             <div className="grid grid-flow-row auto-rows-max grid-cols-2">
                 <div className="flex flex-col items-center text-white">
