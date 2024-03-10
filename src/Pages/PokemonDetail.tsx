@@ -5,6 +5,8 @@ import { Progress } from "@/components/ui/progress"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import Modal from "@/components/Modal";
+
 
 
 const COLOR_TYPE: { [key: string]: string } = {
@@ -32,7 +34,6 @@ const COLOR_TYPE: { [key: string]: string } = {
 
 const PokemonDetail = () => {
     const params = useParams()
-    const [data,setData] = useState()
     const [sprites,setSprites] = useState("")
     const [types,setTypes] = useState([])
     const [stats,setStats] = useState([])
@@ -41,11 +42,12 @@ const PokemonDetail = () => {
     const [height,setHeight] = useState("")
     const [abilities,setAbilities] = useState([])
     const [moves,setMoves] = useState([])
+    const [showModal,setShowModal] = useState(false)
+    const [alias,setAlias] = useState("")
 
     const fetchData = async () => {
         try {
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${params.pokemon}`)
-            setData(response.data)
             setTypes(response.data.types)
             setSprites(response.data.sprites.other.dream_world.front_default)
             setStats(response.data.stats)
@@ -58,10 +60,39 @@ const PokemonDetail = () => {
             console.log((error as Error).message)
         }
     }
+
+    const handleCatch = () => {
+        const chance = Math.random() * 100;
+        if (chance > 50) {
+          setShowModal(true);
+        } else {
+          alert("You missed!");
+        }
+      };
+      const submitMyPokemon = () => {
+        const getFromLocal = JSON.parse(localStorage.getItem("myPokemons") || "[]");
+        const findIfExist = getFromLocal.find(
+          (x) => x.alias == alias
+        );
+        if (findIfExist) {
+          alert(`Alias ${alias} is already exist!`);
+        } else {
+          const myPokemon = Object.assign({}, {
+            name,
+            alias,
+            sprites
+          });
+          getFromLocal.push(myPokemon);
+          localStorage.setItem("myPokemons", JSON.stringify(getFromLocal));
+          setAlias("")
+          setShowModal(false)
+        }
+      };
+
     useEffect(() => {
         fetchData()
     },[])
-    console.log(moves)
+
   return (
     <Layout>
       <div className="grid grid-cols-2 gap-4">
@@ -122,8 +153,36 @@ const PokemonDetail = () => {
         </Card>
       </div>
       <div className="flex justify-center">
-        <Button>Catch</Button>
+        <Button onClick={() => handleCatch()}>Catch</Button>
       </div>
+      <Modal show={showModal}>
+        <div className="mb-5">
+          <p className="text-center font-arcade text-xs font-bold tracking-wide text-neutral-800 dark:text-white">
+            Congratulation!
+          </p>
+          <p className="text-center font-arcade text-xs font-bold tracking-wide text-neutral-800 dark:text-white">
+            You caught {name}
+          </p>
+        </div>
+        <div className="flex flex-col items-center">
+          <label className="block">
+            <span className="block font-arcade text-sm font-medium text-neutral-800 dark:text-white">
+              Nickname
+            </span>
+            <input
+              className="block w-full rounded-md border border-slate-300 bg-white py-2 px-3 font-arcade text-xs shadow-sm placeholder:italic focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+              type="text"
+              onChange={(e) => setAlias(e.target.value)}
+            />
+          </label>
+          <button
+            className="mt-4 rounded-xl border p-3 text-center font-arcade text-xs tracking-wide text-neutral-800 dark:text-white"
+            onClick={() => submitMyPokemon()}
+          >
+            Submit
+          </button>
+        </div>
+      </Modal>
     </Layout>
   )
 }
