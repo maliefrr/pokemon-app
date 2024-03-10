@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import axios from "axios"
@@ -95,7 +96,7 @@ const PokemonDetail = () => {
             <p>Weight : <span className="capitalize">{weight}</span></p>    
         </CardContent>
       </Card>
-      <div className="grid grid-cols-2 mt-3 gap-4">
+      <div className="grid grid-cols-2 mt-3 gap-4 mb-3">
         <Card className="p-3">
             <CardContent>
                 <ul className="ml-3 list-outside list-disc">
@@ -119,6 +120,9 @@ const PokemonDetail = () => {
                 </ul>
             </CardContent>
         </Card>
+      </div>
+      <div className="flex justify-center">
+        <Button>Catch</Button>
       </div>
     </Layout>
   )
