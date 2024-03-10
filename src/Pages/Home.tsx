@@ -45,12 +45,12 @@ const Home = () => {
           </Link>
         ))}
       </div>
-      <div className="col-span-2 flex justify-between mb-3">
-        <button onClick={() => setOffset(offset - 20)}>
+      <div className="col-span-2 flex justify-between">
+        <button onClick={() => setOffset(offset - 20)} disabled={offset === 0}>
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 192 512" className="h-10 w-10 cursor-pointer text-black dark:text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"></path>
             </svg>
         </button>
-        <button onClick={() => setOffset(offset + 20)}>
+        <button onClick={() => setOffset(offset + 20)} disabled={offset === 1300}>
             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 192 512" className="h-10 w-10 cursor-pointer text-black dark:text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
             </svg>
         </button>
