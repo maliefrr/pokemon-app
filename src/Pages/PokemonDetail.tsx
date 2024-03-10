@@ -157,26 +157,26 @@ const PokemonDetail = () => {
       </div>
       <Modal show={showModal}>
         <div className="mb-5">
-          <p className="text-center font-arcade text-xs font-bold tracking-wide text-neutral-800 dark:text-white">
+          <p className="text-center text-xs font-bold tracking-wide text-neutral-800 dark:text-white">
             Congratulation!
           </p>
-          <p className="text-center font-arcade text-xs font-bold tracking-wide text-neutral-800 dark:text-white">
+          <p className="text-center text-xs font-bold tracking-wide text-neutral-800 dark:text-white">
             You caught {name}
           </p>
         </div>
         <div className="flex flex-col items-center">
           <label className="block">
-            <span className="block font-arcade text-sm font-medium text-neutral-800 dark:text-white">
+            <span className="block text-sm font-medium text-neutral-800 dark:text-white">
               Nickname
             </span>
             <input
-              className="block w-full rounded-md border border-slate-300 bg-white py-2 px-3 font-arcade text-xs shadow-sm placeholder:italic focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+              className="block w-full rounded-md border border-slate-300 bg-white py-2 px-3 text-xs shadow-sm placeholder:italic focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
               type="text"
               onChange={(e) => setAlias(e.target.value)}
             />
           </label>
           <button
-            className="mt-4 rounded-xl border p-3 text-center font-arcade text-xs tracking-wide text-neutral-800 dark:text-white"
+            className="mt-4 rounded-xl border p-3 text-center text-xs tracking-wide text-neutral-800 dark:text-white"
             onClick={() => submitMyPokemon()}
           >
             Submit
