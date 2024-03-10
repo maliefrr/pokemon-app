@@ -5,10 +5,19 @@ import { useState, useEffect } from "react"
 
 const MyPokemon = () => {
   const [mypokemon,setMypokemon] = useState([])
+  
+
+  const handleReleasePokemon = (pokemon) => {
+        const filterData = mypokemon.filter((item) => item !== pokemon)
+        localStorage.setItem("myPokemons",JSON.stringify(filterData))
+        setMypokemon(filterData)
+  }
+
   useEffect(() => {
     const getFromLocal = JSON.parse(localStorage.getItem("myPokemons") || "[]");
     setMypokemon(getFromLocal);
   }, []);
+
   console.log(mypokemon)
   return (
     <Layout>
@@ -16,7 +25,7 @@ const MyPokemon = () => {
             {mypokemon.map((item,index) => (
                 <Card key={index}>
                     <div className="text-right p-3">
-                        <Button className="bg-red-500 hover:bg-red-800">X</Button>
+                        <Button className="bg-red-500 hover:bg-red-800" onClick={() => handleReleasePokemon(item)}>X</Button>
                     </div>
                     <CardContent>
                         <CardDescription>
