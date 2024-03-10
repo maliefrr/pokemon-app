@@ -18,7 +18,6 @@ const MyPokemon = () => {
     setMypokemon(getFromLocal);
   }, []);
 
-  console.log(mypokemon)
   return (
     <Layout>
         <div className="grid grid-cols-2">
